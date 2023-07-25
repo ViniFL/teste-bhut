@@ -4,7 +4,7 @@ const consumeApi = require('../services/apiConsumer');
 const connectQueue = require('../services/rabbitmq');
 const Log = require('../models/logModel');
 
-router.get('/listcars', async (req, res) => {
+router.get('/listCars', async (req, res) => {
   try {
     const data = await consumeApi();
     res.json(data);
@@ -15,13 +15,13 @@ router.get('/listcars', async (req, res) => {
 
 router.post('/createCar', async (req, res) => {
   try {
-    const newCar = {
-      brand: 'Toyota',
-      model: 'Corolla',
-      year: 2022,
-    };
+    const newCar = req.body;
 
-    const car = await createCarInDatabase(newCar); // Função que salva o carro no banco e retorna o objeto criado
+    if (!newCar || !newCar.brand || !newCar.model || !newCar.year) {
+      return res.status(400).json({ error: 'Dados inválidos para criar o carro.' });
+    }
+
+    const car = await createCarInDatabase(newCar); 
 
     const logEntry = new Log({ car_id: car._id });
     await logEntry.save();

@@ -4,7 +4,6 @@ const carsController = require('./controllers/carsController');
 const app = express();
 const port = 7000;
 
-// Defina as rotas usando o controlador "carsController"
 app.use('/api', carsController);
 
 app.listen(port, () => {
