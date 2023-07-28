@@ -6,8 +6,6 @@ const consumeApi = async () => {
   try {
     const response = await axios.get(apiUrl);
     const data = response.data;
-    console.log('Dados da API externa:');
-    console.log(data);
     return data;
   } catch (error) {
     console.error('Erro ao consumir a API:', error.message);

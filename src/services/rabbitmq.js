@@ -7,11 +7,10 @@ const connectQueue = async () => {
     const connection = await amqp.connect('amqp://localhost');
     const channel = await connection.createChannel();
     await channel.assertQueue(QUEUE_NAME, { durable: true });
-    console.log('Conexão com o RabbitMQ estabelecida.');
 
     return channel;
   } catch (error) {
-    console.error('Erro ao conectar ao RabbitMQ:', error);
+    console.error(error);
   }
 };
 

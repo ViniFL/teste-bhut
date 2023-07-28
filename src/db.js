@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
 
-const connectDB = async () => {
-  try {
-    const connection = await mongoose.connect('mongodb://localhost:27017/meu_projeto_db', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('Conexão com o MongoDB estabelecida.');
-    return connection;
-  } catch (error) {
-    console.error('Erro ao conectar ao MongoDB:', error.message);
-  }
-};
+const dbUrl = 'mongodb+srv://vihnnyl:Vinicius06@cluster0.0gxxqge.mongodb.net/test?retryWrites=true&w=majority';
 
-module.exports = connectDB;
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'Erro na conexão com o banco de dados:'));
+db.once('open', () => {
+  console.log('Conexão com o banco de dados estabelecida com sucesso!');
+});

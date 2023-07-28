@@ -21,7 +21,8 @@ router.post('/createCar', async (req, res) => {
       return res.status(400).json({ error: 'Dados inválidos para criar o carro.' });
     }
 
-    const car = await createCarInDatabase(newCar); 
+    const car = new Car(newCar);
+    await car.save();
 
     const logEntry = new Log({ car_id: car._id });
     await logEntry.save();
