@@ -6,5 +6,9 @@ Para testar a aplicação, basta clonar o repositório e utilizar a porta localh
 As rotas de acesso para teste são:
 
 Para criar um novo carro - /api/createCar 
+
+
 Para listar os carros presentes na API externa - /api/listCars
+
+
 Para consultar os Logs - /api/logs
